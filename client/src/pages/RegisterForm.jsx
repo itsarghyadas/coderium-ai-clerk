@@ -12,6 +12,7 @@ function SignUpPage() {
         <SignUp
           signInUrl="/login"
           redirectUrl="/dashboard"
+          afterSignUpUrl="/dashboard"
           routing="path"
           path="/register"
           appearance={{
