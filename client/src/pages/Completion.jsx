@@ -43,8 +43,11 @@ function Completion() {
             <span className="font-bold text-red-500">{userEmailAddress}</span>
           </p>
 
-          <button className="mt-5 rounded-lg border border-slate-500/50 bg-indigo-500 py-2 px-5 font-medium text-white shadow drop-shadow-md">
-            <button onClick={() => navigate("/chat")}>Got it Thanks !</button>
+          <button
+            className="mt-5 rounded-lg border border-slate-500/50 bg-indigo-500 px-5 py-2 font-medium text-white shadow drop-shadow-md"
+            onClick={() => navigate("/chat")}
+          >
+            Got it Thanks !
           </button>
         </div>
       </div>
