@@ -1,0 +1,124 @@
+.chatlog-navbar-parent {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  transition: background-color 0.3s ease-out;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.082);
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  border-bottom: 1px dashed rgba(139, 139, 139, 0.18);
+}
+
+.chatlog-navbar__container {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 10px 30px;
+}
+.chatSetting-navbar-parent {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  transition: background-color 0.3s ease-out;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.267);
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px dashed rgba(139, 139, 139, 0.18);
+}
+
+.chatSetting-navbar__container {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 10px 30px;
+}
+
+.scrollable-container::-webkit-scrollbar {
+  width: 0.7em;
+  cursor: pointer;
+}
+
+.scrollable-container::-webkit-scrollbar-track {
+  background: linear-gradient(transparent, #ee7f01, transparent);
+  cursor: pointer;
+}
+
+.scrollable-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(transparent, #4801ee, transparent);
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .scrollable-container::-webkit-scrollbar {
+    width: 0.5em;
+  }
+
+  .scrollable-container::-webkit-scrollbar-track {
+    background: linear-gradient(transparent, #01eece, transparent);
+  }
+
+  .scrollable-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(transparent, #4801ee, transparent);
+  }
+}
+
+.chat-advanced::-webkit-scrollbar {
+  width: 0.4em;
+}
+
+.chat-advanced::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 7px;
+}
+
+.chat-advanced::-webkit-scrollbar-thumb {
+  background: rgba(226, 93, 16, 0.603);
+}
+
+.rotate--360 {
+  transform: rotate(-60deg);
+  transition: transform 0.7s;
+}
+.rotate-360 {
+  transform: rotate(60deg);
+  transition: transform 0.7s;
+}
+
+.mobile-setting-menu {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.chat-advanced {
+  border-left: 1px dashed rgba(139, 139, 139, 0.2);
+}
+
+.navbar-home nav {
+  background: white;
+}
+
+@media screen and (max-width: 768px) {
+  .main-nav-menu-mobile {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    border-right: 1px dashed rgba(139, 139, 139, 0.2);
+  }
+
+  .navbar-home nav {
+    background: rgba(255, 255, 255, 0.267);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+}

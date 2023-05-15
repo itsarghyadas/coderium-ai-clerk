@@ -1,0 +1,282 @@
+.chatapp {
+  background: linear-gradient(
+    176deg,
+    rgb(18, 24, 27) 70%,
+    rgb(22, 25, 31) 100%
+  );
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+@media screen and (max-width: 1280px) {
+  .chat-interface {
+    position: absolute;
+    right: 0;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    overflow: auto;
+    background-color: white;
+    border-radius: 0px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .chat-interface {
+    position: absolute;
+    right: 13px;
+    top: 13px;
+    left: 13px;
+    bottom: 13px;
+    overflow: auto;
+    background-color: white;
+  }
+}
+
+.chatlog {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.chat-advanced {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.sidemenu {
+  transition: all 0.3s cubic-bezier(0, 0, 0.2, 1);
+  will-change: width;
+}
+
+.chatlog {
+  width: 100%;
+  width: calc(100% - 300px);
+}
+
+.promoting-headline {
+  background-image: linear-gradient(to bottom right, #10e758, #3c09f5);
+  background-size: 100% 150%;
+}
+
+.chat-input-holder {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+}
+
+.chat-input-textarea {
+  min-height: 40px;
+  max-height: 240px;
+  border: none;
+  width: 60%;
+  border-radius: 5px;
+  background-color: white;
+  padding: 12px 1.7px 12px 12px;
+  outline: none;
+  box-shadow: 0 0 25px -12px rgba(39, 40, 54, 0.35);
+  border: 1px solid rgba(190, 191, 192, 0.4);
+}
+
+.scrollable-container {
+  height: calc(100% - 70px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.old-chat::-webkit-scrollbar {
+  width: 0.22em;
+}
+
+.old-chat::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+.old-chat::-webkit-scrollbar-thumb {
+  background: linear-gradient(transparent, #0abe88a1, transparent);
+  border-radius: 10px;
+}
+
+.chat-message-container::-webkit-scrollbar {
+  width: 0.35em;
+}
+
+.chat-message-container::-webkit-scrollbar-track {
+  background: linear-gradient(transparent, #0abea0a1, transparent);
+}
+
+.chat-message-container::-webkit-scrollbar-thumb {
+  background: linear-gradient(transparent, #0a8bbea1, transparent);
+}
+
+.chat-input-textarea > textarea::-webkit-scrollbar {
+  width: 0.35em;
+  border-radius: 7px;
+}
+
+.chat-input-textarea > textarea::-webkit-scrollbar-track {
+  background: linear-gradient(transparent, #77eeb3, transparent);
+  border-radius: 7px;
+}
+
+.chat-input-textarea > textarea::-webkit-scrollbar-thumb {
+  background: linear-gradient(transparent, #95b7f7ef, transparent);
+  border-radius: 7px;
+}
+
+.message__code::-webkit-scrollbar {
+  height: 0.4em;
+}
+
+.message__code::-webkit-scrollbar-track {
+  background: rgba(141, 140, 140, 0.137);
+}
+
+.message__code::-webkit-scrollbar-thumb {
+  background: rgba(201, 61, 61, 0.726);
+}
+
+.chat-message {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: inset 0 0 7px rgba(231, 231, 231, 0.35);
+  background-color: white;
+}
+
+.chat-log {
+  scroll-behavior: smooth;
+}
+
+.message__markdown > p {
+  margin-bottom: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+h1.message__heading {
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.8;
+  margin-bottom: 1.2rem;
+  margin-top: 1rem;
+  color: #c0c0bf;
+}
+
+h2.message__heading {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.8;
+  margin-top: 0.8rem;
+  margin-bottom: 0.5rem;
+  color: wheat;
+}
+
+p.message__paragraph {
+  white-space: pre-wrap;
+}
+
+.message__markdown > p:last-child {
+  margin-bottom: 0;
+}
+
+.message__markdown > p:first-child {
+  margin-top: 0;
+}
+
+code.message__code.language-js {
+  color: #0e55a7;
+  font-weight: 600;
+}
+
+.message__code {
+  border-radius: 7px;
+}
+
+.message__paragraph code::before {
+  content: "`";
+}
+
+.message__paragraph code::after {
+  content: "`";
+}
+
+.chat-message-bot {
+  background-color: #fdffff;
+}
+
+.project-prose :where(ul):not(:where([class~="not-prose"] *)) {
+  list-style-type: disc;
+  padding-left: 1em;
+}
+
+.project-prose :where(ol):not(:where([class~="not-prose"] *)) {
+  list-style-type: decimal;
+  margin-top: 1.25em;
+  padding-left: 1em;
+}
+
+.project-prose :where(ol > li):not(:where([class~="not-prose"] *))::marker {
+  color: rgb(233, 116, 20);
+  font-weight: 700;
+  font-family: "karla";
+  font-size: medium;
+}
+
+.project-prose :where(ol > li):not(:where([class~="not-prose"] *)) {
+  padding-left: 0.375em;
+}
+
+.project-prose li {
+  margin-bottom: 0.25rem;
+}
+.chat-message-bot {
+  transition: background-color 0.05s ease-in-out;
+}
+
+.chat-message-user code {
+  font-weight: 600;
+  font-family: "karla";
+}
+
+.chat-message-bot:hover {
+  background-color: #fcfcfc;
+  cursor: pointer;
+}
+
+.message__code {
+  font-weight: 520;
+}
+
+.chat-message-center pre {
+  border-radius: 7px;
+  padding: 0.05rem 0.5rem;
+}
+
+.whitespace-pre-wrap {
+  white-space: pre-wrap;
+}
+.non-space-hidden {
+  visibility: hidden;
+}
+
+.sidemenu {
+  width: 280px;
+  padding: 10px;
+  background-color: #1e1f22;
+  font-family: "Space Grotesk", sans-serif;
+  background: linear-gradient(
+    176deg,
+    rgb(18, 24, 27) 70%,
+    rgb(22, 25, 31) 100%
+  );
+  border-right: 1px dashed #2a2a2a;
+}
