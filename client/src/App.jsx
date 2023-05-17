@@ -34,7 +34,7 @@ function ClerkProviderWithRoutes() {
         <Route path="/completion" element={<Completion />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route
-          path="/dashboard/*"
+          path="/dashboard"
           element={
             <>
               <SignedIn>
