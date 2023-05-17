@@ -43,7 +43,7 @@ function Home() {
             </button>
             <button
               className="hover:ring-slate-900/15 inline-flex justify-center rounded-lg bg-white/0 py-3 px-4 text-[15px] font-semibold text-slate-900 ring-1 ring-slate-900/70 hover:bg-white/25 "
-              onClick={() => navigate("/dashboard")}
+              onClick={() => navigate("/gallery")}
             >
               <span>
                 Explore Gallery{" "}

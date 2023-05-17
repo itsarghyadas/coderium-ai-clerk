@@ -8,7 +8,7 @@ const app = express();
 app.use(cors());
 dotenv.config();
 
-// PUT @ http://localhost:1337/api/totalTokens
+
 export async function totalTokens(req, res) {
   try {
     const { username } = req.query;

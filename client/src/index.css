@@ -16,6 +16,14 @@
     font-display: swap;
     font-style: normal;
   }
+  @font-face {
+    font-family: "Melodrama-Variable";
+    src: url("./font/melodrama/Melodrama-Variable.woff2") format("woff2"),
+      url("./font/melodrama/Melodrama-Variable.woff") format("woff");
+    font-weight: 200 700;
+    font-display: swap;
+    font-style: normal;
+  }
 
   @font-face {
     font-family: "CabinetGrotesk-Variable";
@@ -30,6 +38,18 @@
   body {
     font-family: "Space Grotesk", sans-serif;
     user-select: unset;
+  }
+
+  body::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+
+  body::-webkit-scrollbar-track {
+    background: #1f262d;
+  }
+
+  body::-webkit-scrollbar-thumb {
+    background: #f58e6f;
   }
 
   .navbar-menu {
@@ -264,6 +284,14 @@
       height: 100%;
       padding: 10px 15px;
     }
+
+    .cl-internal-1hcplrf {
+      width: 100%;
+    }
+
+    .cl-internal-1phkynf {
+      display: none;
+    }
   }
   .testimonial-1 {
     background: rgba(219, 86, 46, 0.25);
@@ -295,5 +323,25 @@
     grid-template-rows: auto 1fr auto;
     cursor: pointer;
     position: relative;
+  }
+
+  .prompt::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .prompt::-webkit-scrollbar-thumb {
+    background-color: #666e75;
+    border-radius: 5px;
+  }
+
+  .card:hover img {
+    filter: brightness(0.75);
+  }
+
+  .card {
+    box-shadow: 0px 0px 20px -8px rgba(21, 22, 32, 0.25);
+  }
+  .card:hover {
+    box-shadow: 0px 0px 20px -8px rgba(21, 22, 32, 0.5);
   }
 }

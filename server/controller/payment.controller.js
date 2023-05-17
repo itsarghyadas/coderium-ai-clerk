@@ -14,7 +14,6 @@ const storeItems = new Map([
   [2, { priceInCents: 80000, name: "Pro Package" }],
 ]);
 
-// Create a Checkout Session with the selected items
 export async function createCheckoutSession(req, res) {
   try {
     const { userEmailId } = req.body;
@@ -53,7 +52,6 @@ export async function createCheckoutSession(req, res) {
 }
 
 //! Checking the webhook event of stripe for a successful payment
-// GET @ http://localhost:1337/api/webhook
 export async function handleWebhookEvent(request, response) {
   let event = request.body;
   const signature = request.headers["stripe-signature"];

@@ -7,6 +7,7 @@ module.exports = {
       cabinet: ["CabinetGrotesk-Variable", "sans-serif"],
       space: ["Space Grotesk", "sans-serif"],
       karla: ["Karla", "sans-serif"],
+      melodrama: ["Melodrama-Variable", "sans-serif"],
     },
     extend: {},
   },

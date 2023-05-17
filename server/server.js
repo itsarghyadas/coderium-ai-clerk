@@ -17,7 +17,7 @@ app.use((req, res, next) => {
   ) {
     next();
   } else {
-    express.json()(req, res, next);
+    express.json({ limit: "50mb" })(req, res, next);
   }
 });
 app.disable("x-powered-by");

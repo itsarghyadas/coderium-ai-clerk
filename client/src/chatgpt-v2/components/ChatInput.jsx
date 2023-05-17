@@ -23,6 +23,13 @@ function ChatInput({ chatInputRef, handleSubmit, loading }) {
     }
   };
 
+  const handleButtonClick = (e) => {
+    if (!loading) {
+      setInputHeight("auto");
+    }
+    handleSubmit(e);
+  };
+
   return (
     <div>
       <form
@@ -38,14 +45,17 @@ function ChatInput({ chatInputRef, handleSubmit, loading }) {
             onInput={handleInput}
             spellCheck="false"
             placeholder="Send a message..."
-            className="h-full w-full resize-none placeholder:text-slate-500/40 placeholder:font-semibold placeholder:text-base bg-transparent text-base lg:text-[1.1rem] leading-6 p-1 pr-12 pl-8 font-semibold outline-none"
+            className="h-full w-full resize-none bg-transparent p-1 pl-8 pr-12 text-base font-semibold leading-6 outline-none placeholder:text-base placeholder:font-semibold placeholder:text-slate-500/40 lg:text-[1.1rem]"
           ></textarea>
           <button className="absolute bottom-2.5 left-2 rounded-md p-1 text-gray-500">
             <RiVoiceprintFill size={22} />
           </button>
-          <button className="absolute bottom-2.5 right-2 rounded-md p-1 text-gray-500">
+          <button
+            className="absolute bottom-2.5 right-2 rounded-md p-1 text-gray-500"
+            onClick={handleButtonClick}
+          >
             {loading ? (
-              <div className="animate-spin duration-50 font-bold">
+              <div className="duration-50 animate-spin font-bold">
                 <AiOutlineLoading3Quarters className="h-5 w-5 font-bold text-slate-500" />
               </div>
             ) : (

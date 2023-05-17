@@ -18,9 +18,12 @@ router.post("/checkout", paymentController.createCheckoutSession);
 router.post("/chat", validateRequest, chatController.chat);
 router.post("/googlesearch", chatController.googleSearch);
 router.post("/searchimage", chatController.searchimage);
+router.post("/generateimage", chatController.generateImage);
+router.post("/postimage", chatController.postImage);
 
 //! GET routes
 router.get("/totalTokens", userController.totalTokens);
+router.get("/getimage", chatController.getImage);
 
 //! PUT routes
 router.put("/totalTokens", userController.totalTokens);

@@ -14,6 +14,7 @@ import Dashboard from "./pages/Dashboard";
 import ChatApp from "./chatgpt-v2/ChatApp";
 import Pricing from "./pages/Pricing";
 import Completion from "./pages/Completion";
+import { Gallery, CreatePost } from "./dall-e-v2/page";
 
 if (!import.meta.env.VITE_CLERK_PUBLISHABLE_KEY) {
   throw new Error("Missing Publishable Key");
@@ -31,8 +32,9 @@ function ClerkProviderWithRoutes() {
         <Route path="/login/*" element={<LoginForm />} />
         <Route path="/register/*" element={<Register />} />
         <Route path="/completion" element={<Completion />} />
+        <Route path="/gallery" element={<Gallery />} />
         <Route
-          path="/dashboard"
+          path="/dashboard/*"
           element={
             <>
               <SignedIn>
@@ -50,6 +52,19 @@ function ClerkProviderWithRoutes() {
             <>
               <SignedIn>
                 <ChatApp />
+              </SignedIn>
+              <SignedOut>
+                <Navigate to="/login" />
+              </SignedOut>
+            </>
+          }
+        />
+        <Route
+          path="/imagica"
+          element={
+            <>
+              <SignedIn>
+                <CreatePost />
               </SignedIn>
               <SignedOut>
                 <Navigate to="/login" />

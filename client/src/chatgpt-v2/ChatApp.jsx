@@ -50,7 +50,9 @@ function ChatApp() {
     const age = localStorage.getItem("age");
     const region = localStorage.getItem("region");
 
-    if (inputValue.startsWith("create an image")) {
+    const createImageRegex = /^create an image/i;
+
+    if (createImageRegex.test(inputValue)) {
       try {
         const response = await fetch(generateImageurl, {
           method: "POST",

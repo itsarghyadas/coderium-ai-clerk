@@ -1,13 +1,18 @@
 import React from "react";
 import { GiBrain } from "react-icons/gi";
 import { HiMenuAlt3 } from "react-icons/hi";
-import { BsDiscord } from "react-icons/bs";
+import { IoChatbubblesOutline } from "react-icons/io5";
+import { RiGalleryLine } from "react-icons/ri";
+import { MdOutlineDashboard, MdEmail } from "react-icons/md";
 import {
   AiOutlineHome,
   AiOutlineCreditCard,
   AiOutlineCloseCircle,
-  AiOutlineInstagram,
+  AiFillInstagram,
+  AiOutlineCamera,
 } from "react-icons/ai";
+import { BsDiscord } from "react-icons/bs";
+import { FaTwitter } from "react-icons/fa";
 import { useState } from "react";
 import { useUser, useClerk } from "@clerk/clerk-react";
 import { useMemo } from "react";
@@ -19,6 +24,8 @@ const SignOutButton = () => {
 };
 
 const MobileMenu = React.memo(() => {
+  const navigate = useNavigate();
+  const { user, isSignedIn } = useUser();
   return (
     <div className="main-nav-menu-mobile w-[300px] bg-gray-100 md:w-[300px] lg:flex lg:w-[300px] lg:flex-col">
       <div>
@@ -26,68 +33,93 @@ const MobileMenu = React.memo(() => {
           <ul className="flex-col space-y-7 px-7 py-10 text-[1.1rem] font-bold text-slate-700">
             <div className="flex items-center space-x-3">
               <div className="nav-home-icon">
-                <AiOutlineHome className="text-xl text-slate-900" />
+                <AiOutlineHome className="text-xl text-teal-500" />
               </div>
-              <li className="mt-1.5">Home</li>
+              <li className="mt-1">
+                <button onClick={() => navigate("/")}>Home</button>
+              </li>
             </div>
             <div className="flex items-center space-x-3">
               <div className="nav-home-icon">
-                <AiOutlineCreditCard className="text-xl text-slate-900" />
+                <AiOutlineCreditCard className="text-xl text-red-500" />
               </div>
-              <li className="mt-1.5">Pricing</li>
+              <li className="mt-1">
+                <button onClick={() => navigate("/pricing")}>Pricing</button>
+              </li>
             </div>
             <div className="flex items-center space-x-3">
               <div className="nav-home-icon">
-                <AiOutlineHome className="text-xl text-slate-900" />
+                <RiGalleryLine className="text-xl text-green-500" />
               </div>
-              <li className="mt-1.5">About</li>
+              <li className="mt-1">
+                <button onClick={() => navigate("/gallery")}>Gallery</button>
+              </li>
             </div>
             <div className="flex items-center space-x-3">
               <div className="nav-home-icon">
-                <AiOutlineHome className="text-xl text-slate-900" />
+                <MdOutlineDashboard className="text-xl text-orange-500" />
               </div>
-              <li className="mt-1.5">Chats</li>
+              <li className="mt-1">
+                <button onClick={() => navigate("/dashboard")}>
+                  Dashboard
+                </button>
+              </li>
             </div>
             <div className="flex items-center space-x-3">
               <div className="nav-home-icon">
-                <AiOutlineHome className="text-xl text-slate-900" />
+                <IoChatbubblesOutline className="text-xl text-cyan-500" />
               </div>
-              <li className="mt-1.5">Documentation</li>
+              <li className="mt-1">
+                <button onClick={() => navigate("/chat")}>Chat</button>
+              </li>
+            </div>
+            <div className="flex items-center space-x-3">
+              <div className="nav-home-icon">
+                <AiOutlineCamera className="text-xl text-indigo-500" />
+              </div>
+              <li className="mt-0">
+                <button onClick={() => navigate("/imagica")}>Imagica</button>
+              </li>
             </div>
           </ul>
-        </div>
-        <div className="header-button">
-          <div className="flex flex-col gap-y-2 px-6">
-            <button className="w-full rounded-full border-2 border-slate-700/90 bg-orange-500 py-2 px-4 pl-6 text-left font-bold text-white hover:bg-slate-800">
-              <a href="#">
-                <span>
-                  Get Started <span aria-hidden="true">→</span>
-                </span>
-              </a>
-            </button>
-            <button className="w-full rounded-full border-2 border-slate-800/80 bg-white py-2 px-4 pl-6 text-left font-bold text-black hover:bg-slate-800">
-              <a href="#">
-                <span>
-                  Login <span aria-hidden="true">→</span>
-                </span>
-              </a>
-            </button>
+          <div className="header-button space-x-2">
+            <div className=" px-6 lg:flex lg:items-center">
+              {isSignedIn ? (
+                <div className="profile-menu flex w-full gap-3 rounded-full border-2 border-slate-700/90 bg-orange-500 px-4 py-2 pl-2 text-left font-bold text-white">
+                  <img
+                    className="h-6 w-6 rounded-full ring-1 bg-white ring-slate-800/50"
+                    src={user.profileImageUrl}
+                    alt=""
+                  />
+                  <SignOutButton />
+                </div>
+              ) : (
+                <button
+                  className="profile-menu flex w-full gap-2 rounded-full border-2 border-slate-700/90 bg-slate-900 px-4 py-2 pl-6 text-left font-bold text-white"
+                  onClick={() => navigate("/dashboard")}
+                >
+                  <span>
+                    Go to Dashboard <span aria-hidden="true">→</span>
+                  </span>
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </div>
       <div className="header-follow absolute bottom-5 left-0 right-0">
         <div className="flex items-center justify-evenly space-x-2 px-6 py-4">
           <div>
-            <BsDiscord className="text-2xl text-slate-900" />
+            <BsDiscord className="text-2xl text-indigo-500" />
           </div>
           <div>
-            <AiOutlineInstagram className="text-2xl text-slate-900" />
+            <AiFillInstagram className="text-2xl text-rose-500" />
           </div>
           <div>
-            <BsDiscord className="text-2xl text-slate-900" />
+            <FaTwitter className="text-2xl text-sky-600" />
           </div>
           <div>
-            <BsDiscord className="text-2xl text-slate-900" />
+            <MdEmail className="text-2xl text-teal-500" />
           </div>
         </div>
       </div>
@@ -132,8 +164,9 @@ function Navbar() {
                   Dashboard
                 </button>
               </li>
-              <li>Gallery</li>
-              <li>Contact</li>
+              <li>
+                <button onClick={() => navigate("/gallery")}>Gallery</button>
+              </li>
               <li>
                 <button onClick={() => navigate("/pricing")}>Pricing</button>
               </li>
@@ -154,7 +187,7 @@ function Navbar() {
                 </div>
               ) : (
                 <button
-                  className="inline-flex justify-center rounded-lg bg-slate-900 py-2.5 px-4 text-sm font-semibold text-white hover:bg-slate-800"
+                  className="inline-flex justify-center rounded-lg bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white hover:bg-slate-800"
                   onClick={() => navigate("/dashboard")}
                 >
                   <span>

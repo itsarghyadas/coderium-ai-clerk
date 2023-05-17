@@ -14,6 +14,7 @@
     "@hookform/resolvers": "^2.9.11",
     "@stripe/react-stripe-js": "^1.16.5",
     "@stripe/stripe-js": "^1.48.0",
+    "file-saver": "^2.0.5",
     "framer-motion": "^9.1.7",
     "highlight.js": "^11.7.0",
     "jsonwebtoken": "^9.0.0",

@@ -11,14 +11,16 @@ const DashboardItem = ({
   id,
   version,
   steps,
+  image,
 }) => {
   const navigate = useNavigate();
   return (
-    <div className="card-one w-full rounded-lg px-10 py-8 ">
+    <div className="card-one w-full rounded-lg px-8 py-8 lg:px-10 ">
       {steps && steps.length > 0 && (
         <div className=" flex flex-col md:flex-row ">
           <div className="w-full">
-            <div className="mb-6 flex items-center space-x-2">
+            <img className="rounded" src={image} alt="" />
+            <div className="my-6 flex items-center space-x-2">
               <p className=" text-xl font-bold underline decoration-slate-500 decoration-dashed decoration-1 underline-offset-8">
                 How this works
               </p>
@@ -49,7 +51,7 @@ const DashboardItem = ({
           </div>
         </div>
       )}
-      <div className="absolute -top-2.5 -right-2.5 rounded bg-purple-600 py-1.5 px-4 text-sm font-medium text-white shadow drop-shadow">
+      <div className="absolute -right-2.5 -top-2.5 rounded bg-purple-600 px-4 py-1.5 text-sm font-medium text-white shadow drop-shadow">
         {id}
       </div>
       <div className="flex flex-col md:flex-row"></div>
@@ -62,11 +64,15 @@ const DashboardItem = ({
         </div>
         <p className="text-sm font-bold leading-6 text-slate-500">{details}</p>
         <button
-          className="mt-2 flex w-full items-center justify-center rounded bg-black/90 py-3 font-bold text-white shadow drop-shadow-sm"
+          className={`mt-2 flex h-11 w-full cursor-pointer items-center justify-center rounded-lg ${
+            title === "IMAGIPIX"
+              ? "bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500"
+              : "bg-gradient-to-r from-sky-600 via-blue-600 to-cyan-500"
+          } px-8 py-2 text-base font-semibold text-white shadow drop-shadow transition-all hover:brightness-110 active:scale-95`}
           onClick={() => navigate(link)}
         >
           {linkName}
-          <FiExternalLink className="ml-2 mb-0.5 inline " />
+          <FiExternalLink className="mb-0.5 ml-2 inline" />
         </button>
       </div>
     </div>

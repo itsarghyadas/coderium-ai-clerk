@@ -3,6 +3,15 @@ import dotenv from "dotenv";
 import chalk from "chalk";
 import axios from "axios";
 dotenv.config();
+import Post from "../mongodb/models/post.model.js";
+import UserModel from "../mongodb/models/user.model.js";
+import { v2 as cloudinary } from "cloudinary";
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 const serper_api_key = process.env.SERPER_API_KEY;
 const search_route = process.env.SEARCH_ROUTE;
@@ -96,9 +105,7 @@ async function getChatResponse(
     });
     const generatedText = response.data.choices[0].message;
     const chatToken = response.data.usage.total_tokens;
-    console.log(chatToken);
     const tokenUsage = chatToken + summaryToken;
-    console.log(tokenUsage);
     context.push(generatedText.content.slice(0, 500));
     if (context.length > 3) {
       context.shift();
@@ -197,7 +204,6 @@ export async function googleSearch(req, res) {
       });
       const generatedText = generateAnswer.data.choices[0].message;
       const chatToken = generateAnswer.data.usage.total_tokens;
-      console.log(chatToken);
       const tokenUsage = chatToken + searchToken;
       res.json({
         status: "Google Search Successful",
@@ -215,7 +221,6 @@ export async function googleSearch(req, res) {
 // image generation implementation
 export async function searchimage(req, res) {
   const { messages } = req.body;
-
   try {
     async function query(data) {
       const response = await fetch(huggingface_api_key, {
@@ -247,5 +252,84 @@ export async function searchimage(req, res) {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "An error occurred while calling the API." });
+  }
+}
+
+// image generation implementation
+export async function generateImage(req, res) {
+  try {
+    const { prompt, username } = req.body;
+    const aiResponse = await openai.createImage({
+      prompt,
+      n: 1,
+      size: "512x512",
+      response_format: "b64_json",
+    });
+    const image = aiResponse.data.data[0].b64_json;
+
+    // Deduct 10,000 tokens from user's credits
+    const user = await UserModel.findOne({ username });
+    if (user) {
+      user.credits -= 10000;
+      await user.save();
+    }
+    res.status(200).json({ photo: image });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .send(error?.response.data.error.message || "Something went wrong");
+  }
+}
+
+export async function getImage(req, res) {
+  try {
+    const posts = await Post.find({});
+    res.status(200).json({ success: true, data: posts });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: "Fetching posts failed, please try again",
+    });
+  }
+}
+
+export async function postImage(req, res) {
+  try {
+    const { username, prompt, photo } = req.body;
+
+    // Validate required parameters
+    if (!username || !prompt || !photo) {
+      return res.status(400).json({
+        success: false,
+        message: "Missing required parameters: username, prompt, or photo",
+      });
+    }
+
+    // Upload photo to Cloudinary
+    const photoUrl = await cloudinary.uploader.upload(photo);
+
+    // Validate Cloudinary upload
+    if (!photoUrl) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid photo or upload failed",
+      });
+    }
+
+    // Create a new post
+    const newPost = await Post.create({
+      name: username,
+      prompt,
+      photo: photoUrl.url,
+    });
+
+    res.status(200).json({ success: true, data: newPost });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      success: false,
+      message: "Unable to create a post, please try again",
+    });
   }
 }
