@@ -321,7 +321,7 @@ export async function postImage(req, res) {
     const newPost = await Post.create({
       name: username,
       prompt,
-      photo: photoUrl.url,
+      photo: photoUrl.secure_url,
     });
 
     res.status(200).json({ success: true, data: newPost });
