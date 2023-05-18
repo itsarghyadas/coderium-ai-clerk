@@ -3,6 +3,7 @@ import { RxAvatar } from "react-icons/rx";
 import ReactMarkdown from "react-markdown";
 import CodeBlock from "./CodeBlock";
 import { FaDownload } from "react-icons/fa";
+import { useUser } from "@clerk/clerk-react";
 
 function ChatMessage({ message, imageUrl }) {
   const isBotMessage = message.user === "bot";
@@ -11,6 +12,14 @@ function ChatMessage({ message, imageUrl }) {
       <h1 className="text-2xl font-bold" {...props} />
     ),
     code: CodeBlock,
+  };
+
+  const UserProfile = () => {
+    const { user } = useUser();
+    const userProfileImage = user?.profileImageUrl;
+    return (
+      <img className="h-6 w-6 rounded-full" src={userProfileImage} alt="" />
+    );
   };
 
   return (
@@ -33,11 +42,11 @@ function ChatMessage({ message, imageUrl }) {
                 : "bg-gradient-to-br from-sky-300 to-blue-600"
             }`}
           >
-            {message.user === "bot" ? <GiBrain /> : <RxAvatar />}
+            {message.user === "bot" ? <GiBrain /> : <UserProfile />}
           </div>
         </div>
       </div>
-      <div className="chat-message-center font-karla flex flex-col justify-start py-2 px-5 text-[0.95rem] font-semibold leading-6 tracking-[-0.01em] md:text-[0.97rem] md:leading-[1.6rem] md:tracking-[-0.02em]">
+      <div className="chat-message-center flex flex-col justify-start px-5 py-2 font-karla text-[0.95rem] font-semibold leading-6 tracking-[-0.01em] md:text-[0.97rem] md:leading-[1.6rem] md:tracking-[-0.02em]">
         <div className="message__text whitespace-pre-wrap break-words">
           {isBotMessage && imageUrl !== undefined && imageUrl !== "" ? (
             <div className="flex flex-col gap-1.5">
@@ -48,7 +57,7 @@ function ChatMessage({ message, imageUrl }) {
                     src={message.message}
                     alt="ChatMessage image"
                   />
-                  <button className="flex w-[300px] items-center justify-center space-x-2 rounded bg-slate-200 py-1.5 font-phudu text-lg font-semibold text-slate-700 shadow drop-shadow ">
+                  <button className="font-phudu flex w-[300px] items-center justify-center space-x-2 rounded bg-slate-200 py-1.5 text-lg font-semibold text-slate-700 shadow drop-shadow ">
                     <a href={message.message} download>
                       Download
                     </a>

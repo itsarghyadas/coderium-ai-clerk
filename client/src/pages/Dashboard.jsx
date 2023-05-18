@@ -31,6 +31,8 @@ function Dashboard() {
           </div>
           <div className="my-10">
             <UserProfile
+              routing="path"
+              path="/dashboard"
               appearance={{
                 elements: {
                   card: {
