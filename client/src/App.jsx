@@ -7,6 +7,8 @@ import {
   Navigate,
 } from "react-router-dom";
 import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-react";
+import { Slide, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import Home from "./pages/Home";
 import LoginForm from "./pages/LoginForm";
 import Register from "./pages/RegisterForm";
@@ -79,9 +81,20 @@ function ClerkProviderWithRoutes() {
 
 function App() {
   return (
-    <BrowserRouter>
-      <ClerkProviderWithRoutes />
-    </BrowserRouter>
+    <div className="app">
+      <ToastContainer
+        position="bottom-center"
+        autoClose={1000}
+        theme="dark"
+        transition={Slide}
+        closeOnClick
+        pauseOnHover
+        limit={1}
+      />
+      <BrowserRouter>
+        <ClerkProviderWithRoutes />
+      </BrowserRouter>
+    </div>
   );
 }
 

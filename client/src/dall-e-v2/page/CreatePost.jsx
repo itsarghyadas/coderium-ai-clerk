@@ -5,6 +5,10 @@ import { getRandomPrompt } from "../utils";
 import { FormField, Loader } from "../components";
 import { useUser } from "@clerk/clerk-react";
 import Navbar from "../../components/Navbar";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const CreatePost = () => {
@@ -13,6 +17,7 @@ const CreatePost = () => {
   const username = user?.username;
   const generateDalleUrl = `${baseUrl}/generateimage`;
   const postImageUrl = `${baseUrl}/postimage`;
+  const tokenUrl = `${baseUrl}/totalTokens?username=${username}`;
 
   const [form, setForm] = useState({
     name: "",
@@ -22,6 +27,7 @@ const CreatePost = () => {
 
   const [generatingImg, setGeneratingImg] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [totalToken, setTotalToken] = useState(null); // Initialize totalToken as null
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -31,10 +37,36 @@ const CreatePost = () => {
     setForm({ ...form, prompt: randomPrompt });
   };
 
+  useEffect(() => {
+    if (!username) return;
+    const fetchTokenCount = async () => {
+      try {
+        const response = await fetch(tokenUrl);
+        const { totalToken } = await response.json();
+        setTotalToken(totalToken);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+    fetchTokenCount();
+  }, [username]);
+
+  useEffect(() => {
+    if (totalToken !== null && totalToken < 4000 && generatingImg) {
+      toast.error("Not enough tokens 😢");
+      setLoading(false);
+    }
+  }, [totalToken, generatingImg]);
+
   const generateImage = async () => {
     if (form.prompt) {
       try {
         setGeneratingImg(true);
+        if (totalToken < 12000) {
+          toast.error("Not enough tokens 😢");
+          return; // Return early if token is less than 100
+        }
+        // Rest of the code to make the API call
         const response = await fetch(generateDalleUrl, {
           method: "POST",
           headers: {
@@ -42,6 +74,7 @@ const CreatePost = () => {
           },
           body: JSON.stringify({
             prompt: form.prompt,
+            username: username,
           }),
         });
 
@@ -53,7 +86,7 @@ const CreatePost = () => {
         setGeneratingImg(false);
       }
     } else {
-      alert("Please provide proper prompt");
+      toast.info("Please provide proper prompt");
     }
   };
 
@@ -81,7 +114,7 @@ const CreatePost = () => {
         setLoading(false);
       }
     } else {
-      alert("Please generate an image with proper details");
+      toast.info("Please generate an image first ♻");
     }
   };
 
@@ -138,13 +171,27 @@ const CreatePost = () => {
               onClick={generateImage}
               className=" w-full rounded-md bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 px-5 py-2.5 text-center text-base font-medium text-white shadow ring-1 ring-teal-500/20 drop-shadow"
             >
-              {generatingImg ? "Generating..." : "Generate"}
+              {generatingImg ? (
+                <div className="flex items-center justify-center space-x-2">
+                  <span className="font-bold text-white">Generating</span>
+                  <AiOutlineLoading3Quarters className="h-5 w-5 animate-spin font-bold text-white" />
+                </div>
+              ) : (
+                "Generate"
+              )}
             </button>
             <button
               type="submit"
               className="w-full rounded-md bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 px-5 py-2.5 text-center text-base font-medium text-white shadow ring-1 ring-red-500/20 drop-shadow"
             >
-              {loading ? "Sharing..." : "Share with the Community"}
+              {loading ? (
+                <div className="flex items-center justify-center space-x-2">
+                  <span className="font-bold text-white">Sharing</span>
+                  <AiOutlineLoading3Quarters className="h-5 w-5 animate-spin font-bold text-white" />
+                </div>
+              ) : (
+                "Share with the Community"
+              )}
             </button>
           </div>
         </form>

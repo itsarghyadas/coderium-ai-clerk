@@ -4,6 +4,8 @@ import ChatLog from "./components/ChatLog/ChatLog";
 import ChatAdvancedSetting from "./components/ChatSettings/ChatAdvancedSetting";
 import "./CSS/chatapp.css";
 import { useUser } from "@clerk/clerk-react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 function ChatApp() {
@@ -38,8 +40,9 @@ function ChatApp() {
       return;
     }
 
-    if (totalToken < 2000) {
-      alert("You have run out of tokens. Please Buy More.");
+    if (totalToken < 4000) {
+      toast.error("Not enough tokens 😢");
+      setLoading(false);
       return;
     }
 

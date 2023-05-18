@@ -52,6 +52,12 @@
     background: #f58e6f;
   }
 
+  .app .Toastify__toast {
+    font-family: "Space Grotesk", sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+  }
+
   .navbar-menu {
     background: rgba(255, 255, 255, 0.25);
     box-shadow: 4px 4px 25px -12px rgba(31, 38, 135, 0.37);

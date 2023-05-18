@@ -3,7 +3,11 @@ import { GiBrain } from "react-icons/gi";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { IoChatbubblesOutline } from "react-icons/io5";
 import { RiGalleryLine } from "react-icons/ri";
-import { MdOutlineDashboard, MdEmail } from "react-icons/md";
+import {
+  MdOutlineDashboard,
+  MdEmail,
+  MdGeneratingTokens,
+} from "react-icons/md";
 import {
   AiOutlineHome,
   AiOutlineCreditCard,
@@ -13,17 +17,18 @@ import {
 } from "react-icons/ai";
 import { BsDiscord } from "react-icons/bs";
 import { FaTwitter } from "react-icons/fa";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useUser, useClerk } from "@clerk/clerk-react";
 import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const SignOutButton = () => {
   const { signOut } = useClerk();
   return <button onClick={() => signOut()}>Sign out</button>;
 };
 
-const MobileMenu = React.memo(() => {
+const MobileMenu = React.memo(({ totalToken }) => {
   const navigate = useNavigate();
   const { user, isSignedIn } = useUser();
   return (
@@ -82,12 +87,12 @@ const MobileMenu = React.memo(() => {
               </li>
             </div>
           </ul>
-          <div className="header-button space-x-2">
+          <div className="header-button space-y-2">
             <div className=" px-6 lg:flex lg:items-center">
               {isSignedIn ? (
                 <div className="profile-menu flex w-full gap-3 rounded-full border-2 border-slate-700/90 bg-orange-500 px-4 py-2 pl-2 text-left font-bold text-white">
                   <img
-                    className="h-6 w-6 rounded-full ring-1 bg-white ring-slate-800/50"
+                    className="h-6 w-6 rounded-full bg-white ring-1 ring-slate-800/50"
                     src={user.profileImageUrl}
                     alt=""
                   />
@@ -102,6 +107,18 @@ const MobileMenu = React.memo(() => {
                     Go to Dashboard <span aria-hidden="true">→</span>
                   </span>
                 </button>
+              )}
+            </div>
+            <div className=" px-6 lg:flex lg:items-center">
+              {isSignedIn ? (
+                <div className="flex space-x-2 rounded-full border-2 border-black bg-amber-300 px-3.5 py-2 text-base font-semibold text-white">
+                  <MdGeneratingTokens className="text-2xl text-black" />
+                  <span className="font-clash font-semibold text-black">
+                    {totalToken}
+                  </span>
+                </div>
+              ) : (
+                ""
               )}
             </div>
           </div>
@@ -129,18 +146,37 @@ const MobileMenu = React.memo(() => {
 
 function Navbar() {
   const { user, isSignedIn } = useUser();
+  const [totalToken, setTotalToken] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  let username = "";
+  if (user) {
+    username = user.username;
+    const userEmailId = user.emailAddresses[0]?.emailAddress;
+  }
+  const tokenUrl = `${baseUrl}/totalTokens?username=${username}`;
 
   const handleMobileMenuToggle = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
   const navigate = useNavigate();
-  const memoizedMobileMenu = useMemo(() => <MobileMenu />, []);
+  const memoizedMobileMenu = useMemo(
+    () => <MobileMenu totalToken={totalToken} />,
+    [totalToken]
+  );
 
-  if (user) {
-    const username = user.username;
-    const userEmailId = user.emailAddresses[0]?.emailAddress;
-  }
+  useEffect(() => {
+    if (!username) return;
+    const fetchTokenCount = async () => {
+      try {
+        const response = await fetch(tokenUrl);
+        const { totalToken } = await response.json();
+        setTotalToken(totalToken);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+    fetchTokenCount();
+  }, [username]);
 
   return (
     <div className="navbar-home fixed top-0 z-10 w-full bg-transparent lg:relative ">
@@ -174,6 +210,16 @@ function Navbar() {
           </div>
           <div className="header-button space-x-2">
             <div className="hidden lg:flex lg:items-center">
+              {isSignedIn ? (
+                <div className=" mr-2 flex space-x-2 rounded-full border-2 border-black bg-amber-300 px-3.5 py-1.5 text-base font-semibold text-white">
+                  <MdGeneratingTokens className="text-2xl text-black" />
+                  <span className="font-clash font-semibold text-black">
+                    {totalToken}
+                  </span>
+                </div>
+              ) : (
+                ""
+              )}
               {isSignedIn ? (
                 <div className="hidden lg:flex lg:items-center">
                   <div className="profile-menu flex space-x-2 rounded-full bg-black py-1 pl-4 pr-1 text-base font-semibold text-white">
