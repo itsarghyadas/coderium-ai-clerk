@@ -6,7 +6,7 @@ export default [
     image:
       "https://res.cloudinary.com/dzzhtacky/image/upload/v1684381191/coderium-ai-chat_ll5w8s.png",
     details:
-      "We have used OpenAI API to make a chatbot like ChatGPT which can answer followup questions, admit its mistakes, challenge incorrect premises, and reject inappropriate requests.",
+      "Unlocking Innovation, Powered by Coderium AI - Redefining Possibilities with Intelligent Solutions.",
     linkName: "Try Coderium",
     link: "/chat",
     test: [
@@ -23,11 +23,11 @@ export default [
   {
     id: "IMAGIPIX - Just like DALL-E",
     version: "v1.0",
-    title: "IMAGIPIX",
+    title: "IMAGICA",
     image:
       "https://res.cloudinary.com/dzzhtacky/image/upload/v1684381192/dall-e-ui_brkowg.png",
     details:
-      "We have used OpenAI API DALL-E model to make an AI Art Generator with prompt like DALL-E.2 which can generate AI Art based on the prompt. And also it can edit your existing images which is a great feature but not available for now in this version.",
+      "Imagica AI: Ignite Artistic Vision, Unleash AI's Creative Power - Transforming Prompts into Stunning AI Art, Redefining the Canvas of Imagination.",
     linkName: "Try Imagipix",
     link: "/imagica",
     test: [

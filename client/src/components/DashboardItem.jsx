@@ -20,34 +20,6 @@ const DashboardItem = ({
         <div className=" flex flex-col md:flex-row ">
           <div className="w-full">
             <img className="rounded" src={image} alt="" />
-            <div className="my-6 flex items-center space-x-2">
-              <p className=" text-xl font-bold underline decoration-slate-500 decoration-dashed decoration-1 underline-offset-8">
-                How this works
-              </p>
-              <BsArrowDownCircleFill
-                className=" border- mt-0.5 rounded-full border-slate-500 text-slate-600"
-                size="1.25rem"
-              />
-            </div>
-            {steps.map((step, index) => (
-              <div key={index} className="step flex space-x-4">
-                <div className="step-description">
-                  <ol className="relative flex flex-col border-l border-stone-300/50 md:flex-row">
-                    <li className="ml-4">
-                      <div className="absolute -left-1.5 mt-1.5 h-3 w-3 rounded-full border border-amber-400/50 bg-amber-400" />
-                      <p className="flex flex-row flex-wrap items-center justify-start gap-4 text-xs md:text-sm">
-                        <span className="inline-block rounded-md bg-slate-700 px-2 py-1 text-sm font-semibold text-white">
-                          {step.step}
-                        </span>
-                      </p>
-                      <p className="py-4 text-sm font-semibold text-slate-500">
-                        {step.description}
-                      </p>
-                    </li>
-                  </ol>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       )}
@@ -65,7 +37,7 @@ const DashboardItem = ({
         <p className="text-sm font-bold leading-6 text-slate-500">{details}</p>
         <button
           className={`mt-2 flex h-11 w-full cursor-pointer items-center justify-center rounded-lg ${
-            title === "IMAGIPIX"
+            title === "IMAGICA"
               ? "bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500"
               : "bg-gradient-to-r from-sky-600 via-blue-600 to-cyan-500"
           } px-8 py-2 text-base font-semibold text-white shadow drop-shadow transition-all hover:brightness-110 active:scale-95`}
