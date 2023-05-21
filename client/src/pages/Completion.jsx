@@ -5,11 +5,28 @@ import { useNavigate } from "react-router-dom";
 const baseUrl = import.meta.env.VITE_BASE_URL;
 function Completion() {
   const [totalToken, setTotalToken] = useState(0);
+  const [totalImageToken, setTotalImageToken] = useState(0);
   const navigate = useNavigate();
   const { user } = useUser();
   const username = user?.username;
   const userEmailAddress = user?.emailAddresses[0].emailAddress;
   const tokenUrl = `${baseUrl}/totalTokens?username=${username}`;
+  const tokenImageUrl = `${baseUrl}/totalimgtokens?username=${username}`;
+
+  const fetchTokenCount = async () => {
+    try {
+      const response = await fetch(tokenImageUrl);
+      const { totalImgToken } = await response.json();
+      setTotalImageToken(totalImgToken);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (!username) return;
+    fetchTokenCount();
+  }, [username, tokenImageUrl]);
 
   useEffect(() => {
     if (!username) return;
@@ -35,7 +52,10 @@ function Completion() {
           <h1 className="mb-4 text-2xl font-bold">Payment Successful</h1>
           <p className="mt-2 font-medium text-slate-500/80">
             Thank you for your purchase. Your new token balance is{" "}
-            <span className="font-bold text-purple-700">{totalToken}</span> 🎉
+            <span className="font-bold text-purple-700">{totalToken}</span> and
+            your image credit is{" "}
+            <span className="font-bold text-purple-700">{totalImageToken}</span>
+            🎉
           </p>
 
           <p className="mt-2 font-medium text-slate-500/80">
@@ -45,7 +65,7 @@ function Completion() {
 
           <button
             className="mt-5 rounded-lg border border-slate-500/50 bg-indigo-500 px-5 py-2 font-medium text-white shadow drop-shadow-md"
-            onClick={() => navigate("/chat")}
+            onClick={() => navigate("/dashboard")}
           >
             Got it Thanks !
           </button>
