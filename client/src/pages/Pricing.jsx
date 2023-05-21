@@ -64,7 +64,7 @@ function Pricing() {
       <div className="nav-component">
         <Navbar />
       </div>
-      <div className="container mx-auto max-w-4xl px-5 pt-8 pb-16 sm:pt-10">
+      <div className="container mx-auto max-w-4xl px-5 pb-16 pt-8 sm:pt-10">
         <div className="sm:align-center sm:flex sm:flex-col">
           <h1 className="font-logo mt-4 text-center text-5xl font-bold md:text-6xl">
             Memberships
@@ -100,6 +100,9 @@ function Pricing() {
                   <div className="text-orange-600">
                     🎯 {2 * quantity} lakh Tokens.
                   </div>
+                  <div className="text-teal-600">
+                    🎯 {10 * quantity} Image Credits.
+                  </div>
                   <div>🎯 No slow generations.</div>
                   <div>🎯 Fast Support</div>
                   <div>🎯 One-Time Payment </div>
@@ -107,7 +110,7 @@ function Pricing() {
                 <div className="flex items-center space-x-10 pt-7">
                   <div>
                     <span className="white text-4xl font-bold text-slate-700">
-                      ₹{80 * quantity}
+                      ₹{100 * quantity}
                     </span>
                     <span className="text-base font-medium">/ Individual</span>
                   </div>
@@ -122,7 +125,7 @@ function Pricing() {
               </div>
             </div>
             <div className="card-one relative w-full rounded-lg p-8 ">
-              <div className="absolute -top-2.5 -right-2.5 z-10 rounded bg-red-600 py-1.5 px-4 text-sm font-medium text-white shadow drop-shadow">
+              <div className="absolute -right-2.5 -top-2.5 z-10 rounded bg-red-600 px-4 py-1.5 text-sm font-medium text-white shadow drop-shadow">
                 Most Popular
               </div>
               <div className="flex h-full flex-col p-6">
@@ -130,7 +133,8 @@ function Pricing() {
                   Pro
                 </h2>
                 <div className="mt-5 space-y-1 text-lime-600 ">
-                  <div className="text-orange-600">🎯 6 Million Tokens.</div>
+                  <div className="text-orange-600">🎯 30 lakh Tokens.</div>
+                  <div className="text-blue-600">🎯 100 Image Credits.</div>
                   <div>🎯 Ultimate Fast generations.</div>
                   <div>🎯 Ultra Fast Support</div>
                   <div>🎯 One-Time Payment </div>
@@ -138,7 +142,7 @@ function Pricing() {
                 <div className="mt-auto pt-7">
                   <span className="white text-4xl font-bold text-slate-700">
                     {" "}
-                    ₹800
+                    ₹1000
                   </span>
                   <span className="text-base font-medium">/ Individual</span>
                 </div>

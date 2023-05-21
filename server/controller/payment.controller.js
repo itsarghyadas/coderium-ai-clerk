@@ -10,8 +10,8 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
 const storeItems = new Map([
-  [1, { priceInCents: 8000, name: "Starter Package" }],
-  [2, { priceInCents: 80000, name: "Pro Package" }],
+  [1, { priceInCents: 10000, name: "Starter Package" }],
+  [2, { priceInCents: 100000, name: "Pro Package" }],
 ]);
 
 export async function createCheckoutSession(req, res) {
@@ -71,17 +71,23 @@ export async function handleWebhookEvent(request, response) {
 
     const totalAmountMoney = session.amount_total;
 
-    let newToken = 10000;
+    let newToken = 200000;
+    let newImageToken = 10;
     let upgradeToken;
+    let upgradeImageToken;
 
-    if (totalAmountMoney === 8000) {
+    if (totalAmountMoney === 10000) {
       upgradeToken = newToken;
-    } else if (totalAmountMoney === 16000) {
+      upgradeImageToken = newImageToken;
+    } else if (totalAmountMoney === 20000) {
       upgradeToken = newToken * 2;
-    } else if (totalAmountMoney === 24000) {
+      upgradeImageToken = newImageToken * 2;
+    } else if (totalAmountMoney === 30000) {
       upgradeToken = newToken * 3;
-    } else if (totalAmountMoney === 80000) {
-      upgradeToken = newToken * 10;
+      upgradeImageToken = newImageToken * 3;
+    } else if (totalAmountMoney === 100000) {
+      upgradeToken = newToken * 15;
+      upgradeImageToken = newImageToken * 10;
     }
 
     const customerEmail = session.customer_email;
@@ -90,8 +96,11 @@ export async function handleWebhookEvent(request, response) {
       console.log("User not found");
     } else {
       let totalToken = user.credits || 0;
+      let totalImageToken = user.imgtoken || 0;
       totalToken += upgradeToken;
+      totalImageToken += upgradeImageToken;
       user.credits = totalToken;
+      user.imgtoken = totalImageToken;
       await user.save();
     }
   }
