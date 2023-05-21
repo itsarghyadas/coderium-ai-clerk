@@ -287,7 +287,7 @@ code.message__code.language-js {
 
 @media (max-width: 30em) {
   .cl-internal-4ga6zc {
-    max-width: calc(100vw - 3.5rem);
+    max-width: calc(100vw - 1.8rem);
     margin: 0px 0px 1.75rem;
   }
 }

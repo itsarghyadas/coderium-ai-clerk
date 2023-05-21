@@ -120,6 +120,10 @@ function ChatApp() {
     setLoading(false);
   };
 
+  const clearChat = () => {
+    setMessages([]);
+  };
+
   const updateTokenCount = async (newTotalToken) => {
     try {
       await fetch(tokenUrl, {
@@ -134,10 +138,6 @@ function ChatApp() {
     } catch (error) {
       console.error("Error:", error);
     }
-  };
-
-  const clearChat = () => {
-    setMessages([]);
   };
 
   useEffect(() => {

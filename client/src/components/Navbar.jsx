@@ -144,16 +144,13 @@ const MobileMenu = React.memo(({ totalToken }) => {
   );
 });
 
-function Navbar() {
+function Navbar({ totalToken }) {
   const { user, isSignedIn } = useUser();
-  const [totalToken, setTotalToken] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   let username = "";
   if (user) {
     username = user.username;
-    const userEmailId = user.emailAddresses[0]?.emailAddress;
   }
-  const tokenUrl = `${baseUrl}/totalTokens?username=${username}`;
 
   const handleMobileMenuToggle = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -163,20 +160,6 @@ function Navbar() {
     () => <MobileMenu totalToken={totalToken} />,
     [totalToken]
   );
-
-  useEffect(() => {
-    if (!username) return;
-    const fetchTokenCount = async () => {
-      try {
-        const response = await fetch(tokenUrl);
-        const { totalToken } = await response.json();
-        setTotalToken(totalToken);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-    fetchTokenCount();
-  }, [username]);
 
   return (
     <div className="navbar-home fixed top-0 z-10 w-full bg-transparent lg:relative ">

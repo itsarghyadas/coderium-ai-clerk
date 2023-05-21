@@ -14,6 +14,10 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  imgtoken: {
+    type: Number,
+    required: true,
+  },
 });
 
 const UserModel = mongoose.model("User", UserSchema, "user-data");

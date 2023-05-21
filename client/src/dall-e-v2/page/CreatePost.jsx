@@ -51,20 +51,13 @@ const CreatePost = () => {
     fetchTokenCount();
   }, [username]);
 
-  useEffect(() => {
-    if (totalToken !== null && totalToken < 4000 && generatingImg) {
-      toast.error("Not enough tokens 😢");
-      setLoading(false);
-    }
-  }, [totalToken, generatingImg]);
-
   const generateImage = async () => {
     if (form.prompt) {
       try {
         setGeneratingImg(true);
         if (totalToken < 12000) {
           toast.error("Not enough tokens 😢");
-          return; // Return early if token is less than 100
+          return; // Stop calling the API
         }
         // Rest of the code to make the API call
         const response = await fetch(generateDalleUrl, {
@@ -79,6 +72,7 @@ const CreatePost = () => {
         });
 
         const data = await response.json();
+        setTotalToken(data.credits);
         setForm({ ...form, photo: `data:image/jpeg;base64,${data.photo}` });
       } catch (err) {
         alert(err);
@@ -121,7 +115,7 @@ const CreatePost = () => {
   return (
     <section className="mx-auto max-w-7xl">
       <div>
-        <Navbar />
+        <Navbar totalToken={totalToken} />
       </div>
       <div className="px-3.5 md:px-5">
         <div className="mx-auto mt-24 max-w-3xl ">

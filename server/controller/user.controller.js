@@ -8,7 +8,6 @@ const app = express();
 app.use(cors());
 dotenv.config();
 
-
 export async function totalTokens(req, res) {
   try {
     const { username } = req.query;
@@ -40,6 +39,7 @@ export async function handleAuthWebhookEvent(req, res) {
   const wh = new Webhook(secret);
   let event;
   let signupToken = 10000;
+  let signupCredit = 20;
   try {
     event = wh.verify(payload, headers);
     if (event.type === "user.created") {
@@ -50,6 +50,7 @@ export async function handleAuthWebhookEvent(req, res) {
         email: userEmailAdress,
         username: userUsername,
         credits: signupToken,
+        imgtoken: signupCredit,
       });
       const savedUser = await user.save();
       return res.status(200).send("User created");

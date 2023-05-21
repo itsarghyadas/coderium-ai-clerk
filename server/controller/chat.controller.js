@@ -152,7 +152,6 @@ export async function chat(req, res) {
     }
   }
 }
-
 // Google Search route
 export async function googleSearch(req, res) {
   const { messages } = req.body;
@@ -273,7 +272,7 @@ export async function generateImage(req, res) {
       user.credits -= 10000;
       await user.save();
     }
-    res.status(200).json({ photo: image });
+    res.status(200).json({ photo: image, credits: user.credits });
   } catch (error) {
     console.error(error);
     res
