@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { RxCrossCircled } from "react-icons/rx";
 import Navbar from "../../components/Navbar";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const RenderCards = ({ data, title }) => {
@@ -48,6 +50,7 @@ const Gallery = () => {
       }
     } catch (err) {
       alert(err);
+      toast.error(err.message);
     } finally {
       setLoading(false);
     }
