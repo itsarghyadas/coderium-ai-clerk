@@ -351,3 +351,10 @@
     box-shadow: 0px 0px 20px -8px rgba(21, 22, 32, 0.5);
   }
 }
+.img-token {
+  display: none;
+}
+
+.create-post-page .img-token {
+  display: flex;
+}

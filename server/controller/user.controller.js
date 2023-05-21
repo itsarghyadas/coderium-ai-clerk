@@ -31,6 +31,21 @@ export async function totalTokens(req, res) {
     res.status(500).json({ error: "Internal server error" });
   }
 }
+export async function totalImgTokens(req, res) {
+  try {
+    const { username } = req.query;
+    const user = await UserModel.findOne({ username });
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    let totalImgToken = user.imgtoken || 0;
+    res.json({ totalImgToken });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+}
 
 export async function handleAuthWebhookEvent(req, res) {
   const payload = req.body;

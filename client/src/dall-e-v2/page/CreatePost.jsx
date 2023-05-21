@@ -10,14 +10,14 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 const baseUrl = import.meta.env.VITE_BASE_URL;
+const generateDalleUrl = `${baseUrl}/generateimage`;
+const postImageUrl = `${baseUrl}/postimage`;
 
 const CreatePost = () => {
   const navigate = useNavigate();
   const { user } = useUser();
   const username = user?.username;
-  const generateDalleUrl = `${baseUrl}/generateimage`;
-  const postImageUrl = `${baseUrl}/postimage`;
-  const tokenUrl = `${baseUrl}/totalTokens?username=${username}`;
+  const tokenUrl = `${baseUrl}/totalimgtokens?username=${username}`;
 
   const [form, setForm] = useState({
     name: "",
@@ -27,7 +27,7 @@ const CreatePost = () => {
 
   const [generatingImg, setGeneratingImg] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [totalToken, setTotalToken] = useState(null); // Initialize totalToken as null
+  const [totalToken, setTotalToken] = useState(null);
 
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -37,29 +37,29 @@ const CreatePost = () => {
     setForm({ ...form, prompt: randomPrompt });
   };
 
+  const fetchTokenCount = async () => {
+    try {
+      const response = await fetch(tokenUrl);
+      const { totalImgToken } = await response.json();
+      setTotalToken(totalImgToken);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   useEffect(() => {
     if (!username) return;
-    const fetchTokenCount = async () => {
-      try {
-        const response = await fetch(tokenUrl);
-        const { totalToken } = await response.json();
-        setTotalToken(totalToken);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
     fetchTokenCount();
-  }, [username]);
+  }, [username, tokenUrl]);
 
   const generateImage = async () => {
     if (form.prompt) {
       try {
         setGeneratingImg(true);
-        if (totalToken < 12000) {
+        if (totalToken < 8) {
           toast.error("Not enough tokens 😢");
-          return; // Stop calling the API
+          return;
         }
-        // Rest of the code to make the API call
         const response = await fetch(generateDalleUrl, {
           method: "POST",
           headers: {
@@ -67,7 +67,7 @@ const CreatePost = () => {
           },
           body: JSON.stringify({
             prompt: form.prompt,
-            username: username,
+            username,
           }),
         });
 
@@ -80,7 +80,7 @@ const CreatePost = () => {
         setGeneratingImg(false);
       }
     } else {
-      toast.info("Please provide proper prompt");
+      toast.info("Please provide a proper prompt");
     }
   };
 
@@ -96,7 +96,7 @@ const CreatePost = () => {
           },
           body: JSON.stringify({
             ...form,
-            username: username,
+            username,
           }),
         });
 
@@ -111,9 +111,8 @@ const CreatePost = () => {
       toast.info("Please generate an image first ♻");
     }
   };
-
   return (
-    <section className="mx-auto max-w-7xl">
+    <section className="create-post-page mx-auto max-w-7xl">
       <div>
         <Navbar totalToken={totalToken} />
       </div>

@@ -111,7 +111,7 @@ const MobileMenu = React.memo(({ totalToken }) => {
             </div>
             <div className=" px-6 lg:flex lg:items-center">
               {isSignedIn ? (
-                <div className="flex space-x-2 rounded-full border-2 border-black bg-amber-300 px-3.5 py-2 text-base font-semibold text-white">
+                <div className="img-token flex space-x-2 rounded-full border-2 border-black bg-amber-300 px-3.5 py-2 text-base font-semibold text-white">
                   <MdGeneratingTokens className="text-2xl text-black" />
                   <span className="font-clash font-semibold text-black">
                     {totalToken}
@@ -194,7 +194,7 @@ function Navbar({ totalToken }) {
           <div className="header-button space-x-2">
             <div className="hidden lg:flex lg:items-center">
               {isSignedIn ? (
-                <div className=" mr-2 flex space-x-2 rounded-full border-2 border-black bg-amber-300 px-3.5 py-1.5 text-base font-semibold text-white">
+                <div className="img-token mr-2 flex space-x-2 rounded-full border-2 border-black bg-amber-300 px-3.5 py-1.5 text-base font-semibold text-white">
                   <MdGeneratingTokens className="text-2xl text-black" />
                   <span className="font-clash font-semibold text-black">
                     {totalToken}

@@ -23,6 +23,7 @@ router.post("/postimage", chatController.postImage);
 
 //! GET routes
 router.get("/totalTokens", userController.totalTokens);
+router.get("/totalimgtokens", userController.totalImgTokens);
 router.get("/getimage", chatController.getImage);
 
 //! PUT routes

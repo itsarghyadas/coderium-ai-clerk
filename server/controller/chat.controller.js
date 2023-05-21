@@ -266,13 +266,13 @@ export async function generateImage(req, res) {
     });
     const image = aiResponse.data.data[0].b64_json;
 
-    // Deduct 10,000 tokens from user's credits
+    // Deduct 1 imgtokens from user's imgtoken
     const user = await UserModel.findOne({ username });
     if (user) {
-      user.credits -= 10000;
+      user.imgtoken -= 1;
       await user.save();
     }
-    res.status(200).json({ photo: image, credits: user.credits });
+    res.status(200).json({ photo: image, credits: user.imgtoken });
   } catch (error) {
     console.error(error);
     res
