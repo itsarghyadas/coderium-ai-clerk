@@ -51,6 +51,7 @@ const Gallery = () => {
       const result = await response.json();
       setAllPosts(result.data.reverse());
     } catch (err) {
+      console.error("Error fetching posts:", err);
       toast.error(
         "Something went wrong while fetching posts. Please wait for a while and try again."
       );
