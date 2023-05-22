@@ -49,6 +49,7 @@ const Gallery = () => {
         setAllPosts(result.data.reverse());
       }
     } catch (err) {
+      console.log(err);
       alert(err);
       toast.error(err.message);
     } finally {
