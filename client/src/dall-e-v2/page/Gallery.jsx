@@ -44,14 +44,16 @@ const Gallery = () => {
         },
       });
 
-      if (response.ok) {
-        const result = await response.json();
-        setAllPosts(result.data.reverse());
+      if (!response.ok) {
+        throw new Error("Failed to fetch posts. Please try again later.");
       }
+
+      const result = await response.json();
+      setAllPosts(result.data.reverse());
     } catch (err) {
-      console.log(err);
-      alert(err);
-      toast.error(err.message);
+      toast.error(
+        "Something went wrong while fetching posts. Please wait for a while and try again."
+      );
     } finally {
       setLoading(false);
     }
