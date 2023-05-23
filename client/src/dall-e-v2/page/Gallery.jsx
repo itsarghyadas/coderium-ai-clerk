@@ -50,15 +50,20 @@ const Gallery = () => {
 
       const result = await response.json();
       setAllPosts(result.data.reverse());
+      toast.success("All Posts fetched successfully!");
     } catch (err) {
-      console.error("Error fetching posts:", err);
+      toast.error("Failed to fetch posts.");
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchPosts();
+    try {
+      fetchPosts();
+    } catch (err) {
+      toast.error("Failed to fetch posts.");
+    }
   }, []);
 
   const handleSearchChange = (e) => {
