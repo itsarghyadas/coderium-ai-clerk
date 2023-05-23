@@ -50,7 +50,6 @@ const Gallery = () => {
 
       const result = await response.json();
       setAllPosts(result.data.reverse());
-      toast.success("All Posts fetched successfully!");
     } catch (err) {
       toast.error("Failed to fetch posts.");
     } finally {
