@@ -1,25 +1,8 @@
 # Getting Started with the project
 
-This project was bootstrapped with **Vite**
-
-## Available Scripts
-
-In the `/server` directory, you can run:
-
-```
-npm run watch
-```
-
-In the `/client` directory, you can run:
-
-```
-npm run dev
-```
-
+I have plan to create the appropriate documentation for running this project locally as soon as I find the time to do so.
 
 ## Screenshots
 
-![rendered-chatgpt-v2](https://user-images.githubusercontent.com/89768406/226508359-902af9e4-420e-4572-9b36-2dd88ee962d7.png)
-
-You should get this image/homepage when you run this project and open on the browser.
-
+![coderium-ai-chat-github](https://github.com/itsarghyadas/coderium-ai-clerk/assets/89768406/d1356f9b-6bff-4510-b1b6-ed0ccaa90363)
+![dall-e-ui-github](https://github.com/itsarghyadas/coderium-ai-clerk/assets/89768406/3154d280-e12f-476c-a5f2-ba9c1593fe2c)
