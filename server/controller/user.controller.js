@@ -54,7 +54,7 @@ export async function handleAuthWebhookEvent(req, res) {
   const wh = new Webhook(secret);
   let event;
   let signupToken = 10000;
-  let signupCredit = 20;
+  let signupCredit = 10;
   try {
     event = wh.verify(payload, headers);
     if (event.type === "user.created") {
