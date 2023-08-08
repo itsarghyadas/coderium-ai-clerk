@@ -186,7 +186,7 @@ function ChatApp() {
             totalToken={totalToken}
             handleRoleSelected={handleRoleSelected}
           />
-          <ChatAdvancedSetting />
+          <ChatAdvancedSetting totalToken={totalToken} />
         </div>
       </div>
     </div>

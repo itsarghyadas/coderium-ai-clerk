@@ -3,11 +3,11 @@ import ChatSettingsNav from "./ChatSettingsNav";
 import "../../CSS/chatapp.css";
 import ChatAdvancedItems from "./ChatAdvancedItems";
 
-function ChatAdvancedSetting() {
+function ChatAdvancedSetting({ totalToken }) {
   return (
-    <div className="chat-advanced hidden bg-slate-200 xl:flex xl:w-[280px] xl:flex-col">
-      <ChatSettingsNav />
-      <ChatAdvancedItems />
+    <div className="chat-advanced hidden bg-zinc-50 xl:flex xl:w-[235px] xl:flex-col">
+      {/* <ChatSettingsNav /> */}
+      <ChatAdvancedItems totalToken={totalToken} />
     </div>
   );
 }

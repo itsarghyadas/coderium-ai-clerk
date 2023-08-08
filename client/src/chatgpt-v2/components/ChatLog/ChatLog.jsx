@@ -18,7 +18,7 @@ function ChatLog({
   handleRoleSelected,
 }) {
   return (
-    <div className="chatlog w-full bg-[#fefefe] lg:border-r lg:border-dashed xl:w-[calc(100%-280px)]">
+    <div className="chatlog w-full bg-[#fefefe] lg:border-0 lg:border-dashed xl:w-[calc(100%-235px)]">
       <ChatLogNav
         clearChat={clearChat}
         totalToken={totalToken}

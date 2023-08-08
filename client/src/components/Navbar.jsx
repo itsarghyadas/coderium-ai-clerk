@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { GiBrain } from "react-icons/gi";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { IoChatbubblesOutline } from "react-icons/io5";
@@ -17,75 +17,105 @@ import {
 } from "react-icons/ai";
 import { BsDiscord } from "react-icons/bs";
 import { FaTwitter } from "react-icons/fa";
-import { useState, useEffect } from "react";
 import { useUser, useClerk } from "@clerk/clerk-react";
-import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const SignOutButton = () => {
   const { signOut } = useClerk();
   return <button onClick={() => signOut()}>Sign out</button>;
 };
 
-const MobileMenu = React.memo(({ totalToken }) => {
+function MenuItem({ icon: Icon, text, iconColor, redirect }) {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(redirect);
+  };
+
+  return (
+    <div className="flex items-center space-x-3" onClick={handleClick}>
+      <div className="nav-home-icon">
+        <Icon className={`${iconColor} text-xl`} />
+      </div>
+      <h1 className="mt-1 text-[1.1rem] font-bold text-slate-700">{text}</h1>
+    </div>
+  );
+}
+
+const iconComponents = [
+  { Icon: BsDiscord, color: "text-indigo-500" },
+  { Icon: AiFillInstagram, color: "text-rose-500" },
+  { Icon: FaTwitter, color: "text-sky-600" },
+  { Icon: MdEmail, color: "text-teal-500" },
+];
+
+const IconList = () => (
+  <div className="header-follow absolute bottom-5 left-0 right-0">
+    <div className="flex items-center justify-evenly space-x-2 px-6 py-4">
+      {iconComponents.map(({ Icon, color }) => (
+        <div key={color}>
+          <Icon className={`text-2xl ${color}`} />
+        </div>
+      ))}
+    </div>
+  </div>
+);
+
+function MobileMenu({ totalToken, onClose }) {
   const navigate = useNavigate();
   const { user, isSignedIn } = useUser();
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (!event.target.closest(".main-nav-menu-mobile")) {
+        onClose();
+      }
+    };
+    document.body.addEventListener("click", handleOutsideClick);
+    return () => {
+      document.body.removeEventListener("click", handleOutsideClick);
+    };
+  }, [onClose]);
+
   return (
     <div className="main-nav-menu-mobile w-[300px] bg-gray-100 md:w-[300px] lg:flex lg:w-[300px] lg:flex-col">
       <div>
         <div className="header-menu lg:hidden">
           <ul className="flex-col space-y-7 px-7 py-10 text-[1.1rem] font-bold text-slate-700">
-            <div className="flex items-center space-x-3">
-              <div className="nav-home-icon">
-                <AiOutlineHome className="text-xl text-teal-500" />
-              </div>
-              <li className="mt-1">
-                <button onClick={() => navigate("/")}>Home</button>
-              </li>
-            </div>
-            <div className="flex items-center space-x-3">
-              <div className="nav-home-icon">
-                <AiOutlineCreditCard className="text-xl text-red-500" />
-              </div>
-              <li className="mt-1">
-                <button onClick={() => navigate("/pricing")}>Pricing</button>
-              </li>
-            </div>
-            <div className="flex items-center space-x-3">
-              <div className="nav-home-icon">
-                <RiGalleryLine className="text-xl text-green-500" />
-              </div>
-              <li className="mt-1">
-                <button onClick={() => navigate("/gallery")}>Gallery</button>
-              </li>
-            </div>
-            <div className="flex items-center space-x-3">
-              <div className="nav-home-icon">
-                <MdOutlineDashboard className="text-xl text-orange-500" />
-              </div>
-              <li className="mt-1">
-                <button onClick={() => navigate("/dashboard")}>
-                  Dashboard
-                </button>
-              </li>
-            </div>
-            <div className="flex items-center space-x-3">
-              <div className="nav-home-icon">
-                <IoChatbubblesOutline className="text-xl text-cyan-500" />
-              </div>
-              <li className="mt-1">
-                <button onClick={() => navigate("/chat")}>Chat</button>
-              </li>
-            </div>
-            <div className="flex items-center space-x-3">
-              <div className="nav-home-icon">
-                <AiOutlineCamera className="text-xl text-indigo-500" />
-              </div>
-              <li className="mt-0">
-                <button onClick={() => navigate("/imagica")}>Imagica</button>
-              </li>
-            </div>
+            <MenuItem
+              icon={AiOutlineHome}
+              iconColor="text-teal-500"
+              text="Home"
+              redirect="/"
+            />
+            <MenuItem
+              icon={AiOutlineCreditCard}
+              iconColor="text-red-500"
+              text="Pricing"
+              redirect="/pricing"
+            />
+            <MenuItem
+              icon={RiGalleryLine}
+              iconColor="text-green-500"
+              text="Gallery"
+              redirect="/gallery"
+            />
+            <MenuItem
+              icon={MdOutlineDashboard}
+              iconColor="text-orange-500"
+              text="Dashboard"
+              redirect="/dashboard"
+            />
+            <MenuItem
+              icon={IoChatbubblesOutline}
+              iconColor="text-cyan-500"
+              text="Chat"
+              redirect="/chat"
+            />
+            <MenuItem
+              icon={AiOutlineCamera}
+              iconColor="text-indigo-500"
+              text="Imagica"
+              redirect="/imagica"
+            />
           </ul>
           <div className="header-button space-y-2">
             <div className=" px-6 lg:flex lg:items-center">
@@ -104,7 +134,7 @@ const MobileMenu = React.memo(({ totalToken }) => {
                   onClick={() => navigate("/dashboard")}
                 >
                   <span>
-                    Go to Dashboard <span aria-hidden="true">→</span>
+                    Go to Dashboard <span>→</span>
                   </span>
                 </button>
               )}
@@ -124,25 +154,10 @@ const MobileMenu = React.memo(({ totalToken }) => {
           </div>
         </div>
       </div>
-      <div className="header-follow absolute bottom-5 left-0 right-0">
-        <div className="flex items-center justify-evenly space-x-2 px-6 py-4">
-          <div>
-            <BsDiscord className="text-2xl text-indigo-500" />
-          </div>
-          <div>
-            <AiFillInstagram className="text-2xl text-rose-500" />
-          </div>
-          <div>
-            <FaTwitter className="text-2xl text-sky-600" />
-          </div>
-          <div>
-            <MdEmail className="text-2xl text-teal-500" />
-          </div>
-        </div>
-      </div>
+      <IconList />
     </div>
   );
-});
+}
 
 function Navbar({ totalToken }) {
   const { user, isSignedIn } = useUser();
@@ -152,14 +167,16 @@ function Navbar({ totalToken }) {
     username = user.username;
   }
 
-  const handleMobileMenuToggle = () => {
+  const handleMobileMenuToggle = (event) => {
+    event.stopPropagation(); // Stop event propagation
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
+
+  const handleMobileMenuClose = () => {
+    setIsMobileMenuOpen(false);
+  };
+
   const navigate = useNavigate();
-  const memoizedMobileMenu = useMemo(
-    () => <MobileMenu totalToken={totalToken} />,
-    [totalToken]
-  );
 
   return (
     <div className="navbar-home fixed top-0 z-10 w-full bg-transparent lg:relative ">
@@ -168,9 +185,9 @@ function Navbar({ totalToken }) {
           <button onClick={() => navigate("/")}>
             <div className="header-logo flex items-center space-x-2">
               <GiBrain className="text-3xl text-red-600" />
-              <h1 className="font-clash text-xl font-bold text-slate-600">
+              <h1 className="font-clash text-xl font-bold text-slate-800">
                 coderium
-                <span className="ml-1.5 rounded border-2 border-slate-600 px-0.5 text-[15px] font-bold text-slate-600">
+                <span className="ml-1.5 rounded border-2 border-slate-800 px-0.5 text-[15px] font-bold text-slate-800">
                   AI
                 </span>
               </h1>
@@ -249,7 +266,7 @@ function Navbar({ totalToken }) {
           isMobileMenuOpen ? "-translate-x-0" : "-translate-x-full"
         }`}
       >
-        {memoizedMobileMenu}
+        <MobileMenu totalToken={totalToken} onClose={handleMobileMenuClose} />
       </div>
     </div>
   );

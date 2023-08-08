@@ -73,81 +73,76 @@ function Pricing() {
             Choose a plan that works for you 🚀
           </p>
           <div className="my-8 space-y-8 md:mt-14 md:grid md:grid-cols-2 md:gap-6 md:space-y-0">
-            <div className="card-one w-full rounded-lg p-8 ">
-              <div className="flex h-full flex-col p-6">
+            <div className="card-one w-full rounded-lg p-5 ">
+              <div className="flex h-full flex-col px-2.5 py-1">
                 <div className="flex items-center space-x-5">
-                  <h2 className="text-2xl font-semibold leading-6 underline decoration-dashed decoration-1 underline-offset-8">
+                  <h2 className="font-melodrama text-2xl font-bold leading-6 underline decoration-dashed decoration-1 underline-offset-8">
                     Starter
                   </h2>
-                  <div className="flex items-center  justify-center">
+                  <div className="absolute right-2 top-2 flex items-center justify-center rounded border border-slate-500/50 bg-gradient-to-r from-slate-700 via-gray-800 to-black p-[3px]">
                     <button
-                      className="flex h-6 w-6 items-center justify-center rounded-full border border-slate-800/30 bg-lime-300 text-gray-700
-                      "
+                      className="flex h-6 w-6 items-center justify-center rounded border border-slate-800/30 bg-zinc-50 text-gray-800"
                       onClick={decrementQuantity}
                     >
                       -
                     </button>
-                    <span className="mx-2">{quantity}</span>
+                    <span className="mx-2 font-clash font-[560] text-white">
+                      0{quantity}
+                    </span>
                     <button
-                      className="flex h-6 w-6 items-center justify-center rounded-full border border-slate-800/30 bg-lime-300 text-gray-700 "
+                      className="flex h-6 w-6 items-center justify-center rounded border border-slate-800/30 bg-zinc-50 text-gray-800 "
                       onClick={incrementQuantity}
                     >
                       +
                     </button>
                   </div>
                 </div>
-                <div className="mt-5 space-y-1 text-gray-600/80 ">
-                  <div className="text-orange-600">
-                    🎯 {2 * quantity} lakh Tokens.
-                  </div>
-                  <div className="text-teal-600">
-                    🎯 {10 * quantity} Image Credits.
-                  </div>
-                  <div>🎯 No slow generations.</div>
-                  <div>🎯 Fast Support</div>
-                  <div>🎯 One-Time Payment </div>
+                <div className="mt-5 space-y-1 ">
+                  <div className="">🎯 {2 * quantity} lakh Tokens.</div>
+                  <div className="">🎯 {10 * quantity} Image Credits.</div>
                 </div>
                 <div className="flex items-center space-x-10 pt-7">
                   <div>
-                    <span className="white text-4xl font-bold text-slate-700">
-                      ₹{100 * quantity}
+                    <span className="white font-clash text-4xl font-semibold text-slate-700">
+                      ₹{120 * quantity}
                     </span>
-                    <span className="text-base font-medium">/ Individual</span>
+                    <span className="font-clash text-base font-medium">
+                      / Individual
+                    </span>
                   </div>
                 </div>
 
                 <button
-                  className="mt-6 flex h-11 w-full cursor-pointer items-center justify-center rounded-lg bg-gradient-to-t from-indigo-600 via-indigo-600 to-indigo-500 px-8 py-2 text-base text-white shadow drop-shadow transition-all hover:brightness-110 active:scale-95 "
+                  className="mt-6 flex h-11 w-full cursor-pointer items-center justify-center rounded-lg bg-gradient-to-t from-indigo-600 via-indigo-600 to-indigo-500 px-8 py-2 font-clash text-lg font-[550] text-white shadow drop-shadow transition-all hover:brightness-110 active:scale-95 "
                   onClick={() => handleClick(1)}
                 >
                   Get started
                 </button>
               </div>
             </div>
-            <div className="card-one relative w-full rounded-lg p-8 ">
+            <div className="card-one relative w-full rounded-lg p-5 ">
               <div className="absolute -right-2.5 -top-2.5 z-10 rounded bg-red-600 px-4 py-1.5 text-sm font-medium text-white shadow drop-shadow">
                 Most Popular
               </div>
-              <div className="flex h-full flex-col p-6">
-                <h2 className="text-2xl font-semibold leading-6 underline decoration-dashed decoration-1 underline-offset-8">
+              <div className="flex h-full flex-col px-2.5 py-1">
+                <h2 className="font-melodrama text-2xl font-bold leading-6 underline decoration-dashed decoration-1 underline-offset-8">
                   Pro
                 </h2>
-                <div className="mt-5 space-y-1 text-lime-600 ">
-                  <div className="text-orange-600">🎯 30 lakh Tokens.</div>
-                  <div className="text-blue-600">🎯 100 Image Credits.</div>
-                  <div>🎯 Ultimate Fast generations.</div>
-                  <div>🎯 Ultra Fast Support</div>
-                  <div>🎯 One-Time Payment </div>
+                <div className="mt-5 space-y-1">
+                  <div className="">🎯 30 lakh Tokens.</div>
+                  <div className="">🎯 100 Image Credits.</div>
                 </div>
                 <div className="mt-auto pt-7">
-                  <span className="white text-4xl font-bold text-slate-700">
+                  <span className="white font-clash text-4xl font-semibold text-slate-700">
                     {" "}
-                    ₹1000
+                    ₹1100
                   </span>
-                  <span className="text-base font-medium">/ Individual</span>
+                  <span className="font-clash text-base font-medium">
+                    / Individual
+                  </span>
                 </div>
                 <button
-                  className="mt-6 flex h-11 w-full cursor-pointer items-center justify-center rounded-lg bg-gradient-to-t from-indigo-600 via-indigo-600 to-indigo-500 px-8 py-2 text-base text-white shadow drop-shadow transition-all hover:brightness-110 active:scale-95 "
+                  className="mt-6 flex h-11 w-full cursor-pointer items-center justify-center rounded-lg bg-gradient-to-r from-gray-700 via-gray-900 to-black px-8 py-2 font-clash text-lg font-[550] text-white shadow drop-shadow transition-all hover:brightness-110 active:scale-95 "
                   onClick={() => handleClick(2)}
                 >
                   Get started

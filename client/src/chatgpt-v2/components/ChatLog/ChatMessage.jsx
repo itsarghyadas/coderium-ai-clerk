@@ -17,9 +17,7 @@ function ChatMessage({ message, imageUrl }) {
   const UserProfile = () => {
     const { user } = useUser();
     const userProfileImage = user?.profileImageUrl;
-    return (
-      <img className="h-6 w-6 rounded-full" src={userProfileImage} alt="" />
-    );
+    return <img className="h-6 w-6" src={userProfileImage} alt="" />;
   };
 
   return (
@@ -28,18 +26,22 @@ function ChatMessage({ message, imageUrl }) {
     >
       <div>
         <div className="chat-message__avatar flex items-center justify-between space-x-2 px-5">
-          <h1 className="font-bold">
+          <h1 className="font-clash font-[620]">
             {message.user === "bot" ? (
-              <span className="text-blue-500">Coderium</span>
+              <span className="bg-gradient-to-br from-orange-300 to-red-600 bg-clip-text text-transparent">
+                Coderium
+              </span>
             ) : (
-              <span className="text-orange-500">User</span>
+              <span className="bg-gradient-to-r from-slate-600 via-gray-800 to-black bg-clip-text text-transparent">
+                User
+              </span>
             )}
           </h1>
           <div
-            className={`chat-message__avatar-image flex h-6 w-6 items-center justify-center rounded-full text-xl font-bold text-white ${
+            className={`chat-message__avatar-image flex h-7 w-7 items-center justify-center rounded text-xl font-bold text-white ${
               message.user === "bot"
                 ? "bg-gradient-to-br from-orange-300 to-red-600"
-                : "bg-gradient-to-br from-sky-300 to-blue-600"
+                : "bg-gradient-to-r from-slate-600 via-gray-800 to-black"
             }`}
           >
             {message.user === "bot" ? <GiBrain /> : <UserProfile />}
@@ -57,7 +59,7 @@ function ChatMessage({ message, imageUrl }) {
                     src={message.message}
                     alt="ChatMessage image"
                   />
-                  <button className="font-phudu flex w-[300px] items-center justify-center space-x-2 rounded bg-slate-200 py-1.5 text-lg font-semibold text-slate-700 shadow drop-shadow ">
+                  <button className="flex w-[300px] items-center justify-center space-x-2 rounded border-2 border-teal-500 bg-green-200 py-1.5 font-clash text-lg font-semibold text-slate-700 ">
                     <a href={message.message} download>
                       Download
                     </a>

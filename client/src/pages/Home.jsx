@@ -28,7 +28,7 @@ function Home() {
           </p>
           <div className="mt-6 flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0 md:items-center md:justify-start lg:justify-start">
             <button
-              className="inline-flex justify-center rounded-lg bg-slate-900 py-3 px-4 text-[15px] font-semibold text-white ring-1 ring-slate-900/70 hover:bg-slate-800"
+              className="inline-flex justify-center rounded-lg bg-slate-900 px-4 py-3 text-[15px] font-semibold text-white ring-1 ring-slate-900/70 hover:bg-slate-800"
               onClick={() => navigate("/dashboard")}
             >
               <span>
@@ -42,7 +42,7 @@ function Home() {
               </span>
             </button>
             <button
-              className="hover:ring-slate-900/15 inline-flex justify-center rounded-lg bg-white/0 py-3 px-4 text-[15px] font-semibold text-slate-900 ring-1 ring-slate-900/70 hover:bg-white/25 "
+              className="hover:ring-slate-900/15 inline-flex justify-center rounded-lg bg-white/0 px-4 py-3 text-[15px] font-semibold text-slate-900 ring-1 ring-slate-900/70 hover:bg-white/25 "
               onClick={() => navigate("/gallery")}
             >
               <span>
@@ -89,9 +89,9 @@ function Home() {
             </h1>
           </div>
         </div>
-        <div className="hero-right-part relative sm:px-10 md:px-0 lg:w-[40%] xl:w-1/3">
+        <div className="hero-right-part relative pb-10 sm:px-10 md:px-0 lg:w-[40%] xl:w-1/3">
           <div className="relative -z-20 rotate-6">
-            <div className="testimonial-1 absolute -top-5 -left-5 flex -rotate-12 items-center justify-center space-x-4 rounded-full px-1 py-1 text-white md:-top-3 md:left-5 lg:-top-7 lg:-left-7">
+            <div className="testimonial-1 absolute -left-5 -top-5 flex -rotate-12 items-center justify-center space-x-4 rounded-full px-1 py-1 text-white md:-top-3 md:left-5 lg:-left-7 lg:-top-7">
               <div className="flex items-center justify-center space-x-2 rounded-full border border-slate-300 bg-slate-800/70 px-3 py-1.5">
                 <div className="-ml-1 rounded-full">
                   <img

@@ -13,7 +13,7 @@ function MyToggle({ text, color }) {
   }, [enabled]);
 
   return (
-    <div className="mt-2.5 rounded-md border border-slate-800/50 bg-white px-5 py-3 ">
+    <div className="mt-2.5 rounded-md border border-slate-800/50 bg-white px-3 py-3 ">
       <div className="flex items-center justify-between ">
         <h1 className={`text-sm font-[780] text-slate-800 ${color}`}>{text}</h1>
         <Switch

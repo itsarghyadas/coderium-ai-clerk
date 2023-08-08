@@ -1,9 +1,10 @@
 .chatapp {
-  background: linear-gradient(
+  /*   background: linear-gradient(
     176deg,
     rgb(18, 24, 27) 70%,
     rgb(22, 25, 31) 100%
-  );
+  ); */
+  background-color: #1e1f22;
   position: absolute;
   right: 0;
   top: 0;
@@ -62,7 +63,8 @@
 }
 
 .promoting-headline {
-  background-image: linear-gradient(to bottom right, #10e758, #3c09f5);
+  /* background-image: linear-gradient(to bottom right, #10e758, #3c09f5); */
+ /*  background-color: #1e1f22; */
   background-size: 100% 150%;
 }
 
@@ -84,12 +86,6 @@
   outline: none;
   box-shadow: 0 0 25px -12px rgba(39, 40, 54, 0.35);
   border: 1px solid rgba(190, 191, 192, 0.4);
-}
-
-.scrollable-container {
-  height: calc(100% - 70px);
-  overflow-y: auto;
-  overflow-x: hidden;
 }
 
 .old-chat::-webkit-scrollbar {
@@ -269,15 +265,15 @@ code.message__code.language-js {
 }
 
 .sidemenu {
-  width: 280px;
-  padding: 10px;
+  width: 265px;
+  /* padding: 7px 10px 10px 10px; */
   background-color: #1e1f22;
   font-family: "Space Grotesk", sans-serif;
-  background: linear-gradient(
+  /*   background: linear-gradient(
     176deg,
     rgb(18, 24, 27) 70%,
     rgb(22, 25, 31) 100%
-  );
+  ); */
   border-right: 1px dashed #2a2a2a;
 }
 
@@ -290,4 +286,30 @@ code.message__code.language-js {
     max-width: calc(100vw - 1.8rem);
     margin: 0px 0px 1.75rem;
   }
+}
+
+.character-not-selected {
+  box-shadow: 3px 3px 10px -7px rgba(39, 40, 54, 0.35);
+  border: 1px solid rgba(190, 191, 192, 0.2);
+}
+/* .menu-open {
+  transform: translateX(-270px);
+  transition: transform 0.2s ease-in-out;
+} */
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  animation: gradientAnimation 4s linear infinite;
+  background-size: 200% 200%;
 }

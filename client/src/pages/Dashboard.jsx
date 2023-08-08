@@ -23,7 +23,6 @@ function Dashboard() {
                   linkName={item.linkName}
                   id={item.id}
                   version={item.version}
-                  steps={item.test}
                   image={item.image}
                 />
               ))}

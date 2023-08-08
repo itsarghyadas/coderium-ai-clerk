@@ -12,6 +12,7 @@
     "@clerk/clerk-react": "^4.15.4",
     "@headlessui/react": "^1.7.13",
     "@hookform/resolvers": "^2.9.11",
+    "@radix-ui/react-popover": "^1.0.6",
     "@stripe/react-stripe-js": "^1.16.5",
     "@stripe/stripe-js": "^1.48.0",
     "file-saver": "^2.0.5",
